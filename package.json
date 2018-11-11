@@ -10,11 +10,11 @@
     "@babel/register": "^7.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
-    "gulp-series": "^1.0.2"
+    "gulp-inject-string": "^1.1.1"
   },
   "scripts": {
     "build": "./node_modules/gulp/bin/gulp.js"
   },
   "author": "StormForger",
-  "license": "ISC"
+  "license": "MIT"
 }
