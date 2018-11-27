@@ -10,7 +10,9 @@
     "@babel/register": "^7.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
-    "gulp-inject-string": "^1.1.1"
+    "gulp-inject-string": "^1.1.1",
+    "gulp-sourcemaps": "^2.6.4",
+    "event-stream": "3.3.4"
   },
   "scripts": {
     "build": "./node_modules/gulp/bin/gulp.js"
