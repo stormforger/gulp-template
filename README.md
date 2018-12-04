@@ -8,6 +8,7 @@ This is the basic directory structure:
 
 * `cases` contain test cases
 * `components` contain helpers and modules/components that are independent of a specific test case which are meant to be re-used.
+* `data` contains test data (data sources)
 * `dist` will contain the compiled output
 
 Each directory in `cases` mirrors one test case at StormForger. Within `cases` there is `setup.js` which configures the test case in general. `cases/scenarios/` contains one more more [StormForger sessions](https://docs.stormforger.com/reference/). These scenarios can be [HAR recordings](https://docs.stormforger.com/guides/har-converter/) for example.
