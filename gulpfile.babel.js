@@ -21,7 +21,7 @@ exports.default = gulp.task("default", () => {
 // ========================================================
 // helper
 function buildPipeline(input, output) {
-  return gulp.src(input, {})
+  return gulp.src(input, { base: "." })
     .pipe(sourcemaps.init())
       .pipe(concat(output))
       .pipe(insert.wrap(getBanner(), getFooter()))
