@@ -35,6 +35,25 @@ To build your test case, run
 npm run build
 ```
 
+## Usage (Docker Compose)
+
+To prepare the docker image and install npm dependencies, simply run
+
+```terminal
+docker-compose run --rm stormforger-gulp install
+```
+
+To rebuild or update the image, run (maybe add `--no-cache`)
+
+```terminal
+docker-compose build
+```
+
+The entrypoint of `stormforger-gulp` is `npm`, so to run `npm run build` to build your test case, run
+
+```terminal
+docker-compose run stormforger-gulp run build
+```
 
 ## Next Steps
 

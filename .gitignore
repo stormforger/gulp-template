@@ -1,5 +1,7 @@
 # node.js dependencies
 node_modules/
 
+.env
+
 # tmp files
 cookie.jar

@@ -1,0 +1,11 @@
+version: "3"
+services:
+  stormforger-gulp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: stormforger-gulp
+    volumes:
+      - .:/src
+    env_file:
+      - .env

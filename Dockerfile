@@ -1,12 +1,7 @@
 FROM stormforger/cli AS sf-cli
-FROM node
+FROM node:11
 
-COPY package.json package-lock.json /src/cases/
-
-WORKDIR /src/cases/
-
-RUN npm install
-
+WORKDIR /src/
 COPY --from=sf-cli /bin/forge /bin/forge
 
-ENTRYPOINT [ "npm", "run" ]
+ENTRYPOINT [ "npm" ]
