@@ -8,14 +8,14 @@
   },
   "repository": "github:stormforger/gulp-template",
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.0",
-    "@babel/register": "^7.0.0",
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
     "event-stream": "3.3.4",
-    "gulp": "^4.0.0",
+    "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-inject-string": "^1.1.2",
-    "gulp-sourcemaps": "^2.6.4"
+    "gulp-sourcemaps": "^2.6.5"
   },
   "scripts": {
     "build": "./node_modules/gulp/bin/gulp.js"
