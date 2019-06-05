@@ -4,7 +4,8 @@
   "description": "This is a template repository to manage StormForger test cases using gulp",
   "main": "",
   "dependencies": {
-    "source-map": "^0.7.3"
+    "source-map": "^0.7.3",
+    "dotenv": "^5.0.1"
   },
   "repository": "github:stormforger/gulp-template",
   "devDependencies": {
@@ -14,6 +15,7 @@
     "event-stream": "3.3.4",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
+    "gulp-envify": "^1.0.0",
     "gulp-inject-string": "^1.1.2",
     "gulp-sourcemaps": "^2.6.5"
   },

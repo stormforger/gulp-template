@@ -1,0 +1,5 @@
+[
+  "./cases/acme-shop/setup.js",
+  "./cases/acme-shop/scenarios/*.js",
+  "./components/*.js"
+]

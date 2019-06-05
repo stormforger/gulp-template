@@ -1,31 +1,59 @@
 "use strict";
 
+import fs from "fs";
+
 import gulp from "gulp";
 import concat from "gulp-concat";
 import insert from "gulp-inject-string";
 import sourcemaps from "gulp-sourcemaps";
+import envify from "gulp-envify";
+import dotenv from "dotenv"
 
-const outputDir = "./dist";
-
-exports.default = gulp.task("default", () => {
-  const output = "acme-shop.js";
-
-  return buildPipeline([
-      "./cases/acme-shop/setup.js",
-      "./cases/acme-shop/scenarios/*.js",
-      "./components/*.js",
-    ], output);
-});
-
-
+// Configuration
 // ========================================================
-// helper
+const outputDir = "./dist";
+const manifestFileName = "manifest.json";
+const {parsed} = dotenv.config()
+
+// Generate gulp tasks based on directories in ./cases
+generateTasks("./cases");
+
+// Helpers
+// ========================================================
+
+function generateTasks(basePath) {
+  let allTasks = [];
+
+  fs.readdirSync(basePath).forEach((name) => {
+    const stats = fs.statSync("cases/" + name);
+    if (stats.isDirectory()) {
+      try {
+        const manifest = JSON.parse(fs.readFileSync("cases/" + name + "/" + manifestFileName));
+        console.log("====> Defining test case '" + name + "' with manifest: ", manifest);
+        exports[name] = gulp.task(name, () => {
+          return buildPipeline(manifest, name + ".js");
+        });
+
+        allTasks.push(name);
+      }
+      catch (e) {
+        console.error(e)
+        console.error("====> Could not load manifest file for: " + name);
+        process.exit(1);
+      }
+    }
+  });
+
+  exports.default = gulp.parallel(allTasks);
+}
+
 function buildPipeline(input, output) {
   return gulp.src(input, { base: "." })
+    .pipe(envify(parsed))
     .pipe(sourcemaps.init())
-      .pipe(concat(output))
-      .pipe(insert.wrap(getBanner(), getFooter()))
-     .pipe(sourcemaps.write())
+    .pipe(concat(output))
+    .pipe(insert.wrap(getBanner(), getFooter()))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest(outputDir));
 }
 
