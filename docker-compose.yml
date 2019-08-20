@@ -1,18 +1,16 @@
 version: "3"
 services:
   npm:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: node:12-alpine
     volumes:
       - .:/src
     env_file:
       - .env
+
+    entrypoint: npm
+    working_dir: /src
   forge:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    entrypoint: /bin/forge
+    image: stormforger/cli
     volumes:
       - .:/src
     env_file:
