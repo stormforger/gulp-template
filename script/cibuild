@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# script/cibuild: Script to be executed on CI builds
+
+set -eu -o pipefail
+
+git diff --quiet || ( echo "Directory is dirty!"; exit 1 )
+[[ -z $(git status --short) ]] || ( echo "Directory is dirty! (untracked files)"; exit 1 )
