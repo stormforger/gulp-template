@@ -21,4 +21,4 @@ jobs:
       run: |
         npm install
         npm run build --if-present
-        git diff --quiet
+        ./script/cibuild
