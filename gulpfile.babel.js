@@ -7,7 +7,7 @@ import concat from "gulp-concat";
 import insert from "gulp-inject-string";
 import sourcemaps from "gulp-sourcemaps";
 import envify from "gulp-envify";
-import dotenv from "dotenv"
+import dotenv from "dotenv";
 
 // Configuration
 // ========================================================
@@ -42,6 +42,14 @@ function generateTasks(basePath) {
         process.exit(1);
       }
     }
+  });
+
+  exports.watch = gulp.task("watch", () => {
+    const options = {
+      queue: true,
+    };
+
+    gulp.watch(["cases/**/*.js", "components/**/*.js"], options, gulp.parallel(allTasks));
   });
 
   exports.default = gulp.parallel(allTasks);
