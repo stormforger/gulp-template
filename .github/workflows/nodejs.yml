@@ -22,3 +22,9 @@ jobs:
         npm install
         npm run build --if-present
         ./script/cibuild
+    - name: validate test case
+      uses: docker://stormforger/cli:v0.32.0
+      env:
+        STORMFORGER_JWT: ${{ secrets.STORMFORGER_JWT }}
+      with:
+        args: test-case validate acme-inc /github/workspace/dist/acme-shop.js
