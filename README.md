@@ -1,3 +1,6 @@
+<img src="https://github.com/stormforger/gulp-template/workflows/Node%20CI/badge.svg"
+            alt="GitHub Actions Badge">
+
 This repository contains test case definitions, data and tooling to manage one or more complex StormForger test cases.
 
 It uses [gulp](https://gulpjs.com/) to process configuration, scenarios and other input files to generate a full-featured StormForger test case.
