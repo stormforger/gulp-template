@@ -9,16 +9,16 @@
   },
   "repository": "github:stormforger/gulp-template",
   "devDependencies": {
-    "@babel/core": "^7.6.0",
-    "@babel/preset-env": "^7.6.0",
-    "@babel/register": "^7.6.0",
+    "@babel/core": "7.6.0",
+    "@babel/preset-env": "7.6.0",
+    "@babel/register": "7.6.0",
     "event-stream": "4.0.1",
-    "gulp": "^4.0.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-envify": "^1.0.0",
-    "gulp-inject-string": "^1.1.2",
-    "gulp-sourcemaps": "^2.6.5",
-    "lodash.template": ">=4.5.0"
+    "gulp": "4.0.2",
+    "gulp-concat": "2.6.1",
+    "gulp-envify": "1.0.0",
+    "gulp-inject-string": "1.1.2",
+    "gulp-sourcemaps": "2.6.5",
+    "lodash.template": "4.5.0"
   },
   "scripts": {
     "build": "./node_modules/gulp/bin/gulp.js"
