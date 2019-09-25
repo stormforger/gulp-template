@@ -74,7 +74,7 @@ You can also use the `forge` CLI to integrate into your CI system by automatical
 To use `forge` (our command line client), you need to have `STORMFORGER_JWT` set in `.env` (see `.env.example` for details).
 
 ```terminal
-dompose-compose run --rm forge ping
+docker-compose run --rm forge ping
 ```
 
 You should see a message like `PONG! Authenticated as foo@example.com`.
