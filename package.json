@@ -9,7 +9,7 @@
   },
   "repository": "github:stormforger/gulp-template",
   "devDependencies": {
-    "@babel/core": "7.6.3",
+    "@babel/core": "7.6.4",
     "@babel/preset-env": "7.6.3",
     "@babel/register": "7.6.2",
     "event-stream": "4.0.1",
