@@ -2,15 +2,16 @@ version: "3"
 services:
   npm:
     image: node:12-alpine
+    working_dir: /src
+    entrypoint: npm
     volumes:
       - .:/src
     env_file:
       - .env
 
-    entrypoint: npm
-    working_dir: /src
   forge:
     image: stormforger/cli
+    working_dir: /src
     volumes:
       - .:/src
     env_file:
