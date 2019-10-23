@@ -9,6 +9,16 @@ It uses [gulp](https://gulpjs.com/) to process configuration, scenarios and othe
 
 This is the basic directory structure:
 
+```
+./
+|── /cases
+|  |── /acme_setup
+|  |  |── setup.js
+├── /components
+├── /data
+├── /dist
+```
+
 * `cases` contains test cases
 * `components` contains helpers and modules/components that are independent of a specific test case which are meant to be re-used and shared between test cases
 * `data` contains test data (data sources)
@@ -48,6 +58,15 @@ To run a specific case, run
 ```terminal
 npm run build acme-shop
 ```
+The name of the case has to be the same as the directory name.
+
+### Build arguments
+
+Name | Description | Example
+---|---|---
+`--minify` | Enable minification (uglify) | `npm run build -- --minify`
+`--sourcemaps` | Enable sourcemaps | `npm run build -- --sourcemaps`
+
 
 ### Validate & Upload Test Cases
 

@@ -8,61 +8,86 @@ import insert from "gulp-inject-string";
 import sourcemaps from "gulp-sourcemaps";
 import envify from "gulp-envify";
 import dotenv from "dotenv";
+import gulpSize from "gulp-size";
+import gulpUglify from "gulp-uglify";
+import gulpIf from "gulp-if";
+import { argv } from "yargs";
 
 // Configuration
 // ========================================================
-const outputDir = "./dist";
-const manifestFileName = "manifest.json";
-const {parsed} = dotenv.config()
+const OUTPUT_DIR = "./dist";
+const MANIFEST_FILE_NAME = "manifest.json";
+const CASES_DIR = "cases/";
+const enableSourcemaps = !!argv.sourcemaps;
+const enableMinify = !!argv.minify;
+const { parsedEnvs } = dotenv.config();
 
-// Generate gulp tasks based on directories in ./cases
-generateTasks("./cases");
+// Generate gulp tasks based on directories in CASES_DIR
+generateTasks(CASES_DIR);
 
 // Helpers
 // ========================================================
 
 function generateTasks(basePath) {
-  let allTasks = [];
+  const allTasksWithManifest = fs
+    .readdirSync(basePath)
+    .reduce(prepareTasks, {});
 
-  fs.readdirSync(basePath).forEach((name) => {
-    const stats = fs.statSync("cases/" + name);
-    if (stats.isDirectory()) {
-      try {
-        const manifest = JSON.parse(fs.readFileSync("cases/" + name + "/" + manifestFileName));
-        console.log("====> Defining test case '" + name + "' with manifest: ", manifest);
-        exports[name] = gulp.task(name, () => {
-          return buildPipeline(manifest, name + ".js");
-        });
+  const tasksNames = Object.keys(allTasksWithManifest)
 
-        allTasks.push(name);
-      }
-      catch (e) {
-        console.error(e)
-        console.error("====> Could not load manifest file for: " + name);
-        process.exit(1);
-      }
-    }
-  });
+  Object.entries(allTasksWithManifest)
+    .forEach(([taskName, manifest]) => gulp.task(taskName, () => (buildPipeline(manifest, taskName + ".js"))));
 
   exports.watch = gulp.task("watch", () => {
-    const options = {
-      queue: true,
-    };
-
-    gulp.watch(["cases/**/*.js", "components/**/*.js"], options, gulp.parallel(allTasks));
+    gulp.watch(
+      [`${CASES_DIR}**/*.js`, "components/**/*.js"],
+      { queue: true },
+      gulp.parallel(tasksNames)
+    );
   });
 
-  exports.default = gulp.parallel(allTasks);
+  exports.default = gulp.parallel(tasksNames);
 }
 
-function buildPipeline(input, output) {
-  return gulp.src(input, { base: "." })
-    .pipe(envify(parsed))
-    .pipe(sourcemaps.init())
-    .pipe(concat(output))
+function buildPipeline(manifestFile, outputFileName) {
+  return gulp
+    .src(manifestFile, { base: "." })
+    .pipe(envify(parsedEnvs))
+    .pipe(gulpIf(enableSourcemaps, sourcemaps.init()))
+    .pipe(concat(outputFileName))
     .pipe(insert.wrap(getBanner(), getFooter()))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest(outputDir));
+    .pipe(gulpIf(enableMinify, gulpUglify({
+      compress: true
+    })))
+    .pipe(gulpIf(enableSourcemaps, sourcemaps.write()))
+    .pipe(gulpSize({
+      gzip: true,
+      showFiles: true
+    }))
+    .pipe(gulp.dest(OUTPUT_DIR));
+}
+
+function prepareTasks (acc, taskName) {
+  const stats = fs.statSync(CASES_DIR + taskName);
+  if (stats.isDirectory()) {
+    try {
+      const manifest = JSON.parse(
+        fs.readFileSync(CASES_DIR + taskName + "/" + MANIFEST_FILE_NAME)
+      );
+
+      console.log("====> Defining test case '" + taskName + "' with manifest: ", manifest);
+
+      return {
+        ...acc,
+        [taskName]: manifest
+      }
+    } catch (e) {
+      console.error(e)
+      console.error("====> Could not load manifest file for: " + taskName);
+      process.exit(1);
+    }
+  }
+  return acc
 }
 
 function getBanner() {

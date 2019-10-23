@@ -4,8 +4,9 @@
   "description": "This is a template repository to manage StormForger test cases using gulp",
   "main": "",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "source-map": "^0.7.3",
-    "dotenv": "^8.2.0"
+    "yargs": "^14.2.0"
   },
   "repository": "github:stormforger/gulp-template",
   "devDependencies": {
@@ -16,12 +17,15 @@
     "gulp": "4.0.2",
     "gulp-concat": "2.6.1",
     "gulp-envify": "1.0.0",
+    "gulp-if": "^3.0.0",
     "gulp-inject-string": "1.1.2",
+    "gulp-size": "^3.0.0",
     "gulp-sourcemaps": "2.6.5",
+    "gulp-uglify": "^3.0.2",
     "lodash.template": "4.5.0"
   },
   "scripts": {
-    "build": "./node_modules/gulp/bin/gulp.js"
+    "build": "gulp"
   },
   "author": "StormForger",
   "license": "MIT"
