@@ -9,9 +9,9 @@
   },
   "repository": "github:stormforger/gulp-template",
   "devDependencies": {
-    "@babel/core": "7.6.4",
-    "@babel/preset-env": "7.6.3",
-    "@babel/register": "7.6.2",
+    "@babel/core": "7.7.2",
+    "@babel/preset-env": "7.7.1",
+    "@babel/register": "7.7.0",
     "event-stream": "4.0.1",
     "gulp": "4.0.2",
     "gulp-concat": "2.6.1",
