@@ -1,3 +1,13 @@
+# ⚠️ DEPRECATED ⚠️ - Use our `forge` CLI instead!
+
+The `gulp-template` approach to strucutre more complex StormForger test cases is deprecated. We recommend everyone to use the ES module bundling support of our [command line tool](https://github.com/stormforger/cli).
+
+You can find some [examples in the CLI repository](https://github.com/stormforger/cli/tree/master/examples/acme-inc-shop).
+
+Using the build-in support for ES modules (`import`/`export`) in newer CLI versions is much easier to use, requires no setup or no additional dependency other than the CLI binary itself and is also much faster. Using `--define` with the CLI also enables easier modification of the test case at build-time.
+
+---
+
 <img src="https://github.com/stormforger/gulp-template/workflows/Node%20CI/badge.svg"
             alt="GitHub Actions Badge">
 
